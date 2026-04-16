@@ -1,0 +1,3 @@
+<?php require_once __DIR__ . '/../config/database.php'; require_once __DIR__ . '/../includes/auth.php'; require_login();
+$id=(int)($_GET['id']??0);$lead=$pdo->query('SELECT * FROM leads WHERE id='.$id)->fetch(); if(!$lead) die('Lead not found');
+?><!doctype html><html><head><meta charset="utf-8"><title>Lead Detail Print</title><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"></head><body class="p-4"><h3>Lead Detail - #<?= (int)$lead['id'] ?></h3><table class="table table-bordered"><?php foreach($lead as $k=>$v):?><tr><th><?= htmlspecialchars($k) ?></th><td><?= htmlspecialchars((string)$v) ?></td></tr><?php endforeach;?></table><script>window.print()</script></body></html>

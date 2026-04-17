@@ -1,0 +1,5 @@
+body { background: #f7f8fb; }
+.card-stat { min-height: 120px; }
+.timeline { border-left: 3px solid #dee2e6; padding-left: 1rem; }
+.timeline-item { margin-bottom: 1rem; }
+.table-responsive { background: #fff; border-radius: .5rem; }

@@ -54,6 +54,7 @@ It supports daily outreach flows for social media services, frontend websites, a
 1. Copy project folder to your web root (`htdocs` for XAMPP).
 2. Create a MySQL database named `lead_management` (or use script auto-create).
 3. Import `database/database.sql` in phpMyAdmin.
+   - If upgrading an existing install, re-import or manually add new tables/columns from latest SQL.
 4. Copy `config/config.sample.php` to `config/config.php` and set DB credentials.
 5. Ensure `assets/uploads` is writable.
 6. Open browser: `http://localhost/leadmanagment` (or your exact project folder name).

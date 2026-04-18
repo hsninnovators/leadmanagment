@@ -16,6 +16,8 @@ foreach ($stageList as $stage) {
 }
 $dueToday = $pdo->query("SELECT COUNT(*) c FROM leads WHERE deleted_at IS NULL AND DATE(next_follow_up_date)=CURDATE() $whereOwn")->fetch()['c'];
 $overdue = $pdo->query("SELECT COUNT(*) c FROM leads WHERE deleted_at IS NULL AND next_follow_up_date < CURDATE() $whereOwn")->fetch()['c'];
+$weekCount = $pdo->query("SELECT COUNT(*) c FROM leads WHERE deleted_at IS NULL AND YEARWEEK(created_at,1)=YEARWEEK(CURDATE(),1) $whereOwn")->fetch()['c'];
+$monthCount = $pdo->query("SELECT COUNT(*) c FROM leads WHERE deleted_at IS NULL AND YEAR(created_at)=YEAR(CURDATE()) AND MONTH(created_at)=MONTH(CURDATE()) $whereOwn")->fetch()['c'];
 
 $recentActivities = $pdo->query("SELECT a.*, u.full_name FROM activity_logs a LEFT JOIN users u ON u.id=a.user_id ORDER BY a.created_at DESC LIMIT 10")->fetchAll();
 $tasksToday = $pdo->query("SELECT t.*, l.full_name lead_name FROM lead_tasks t LEFT JOIN leads l ON l.id=t.lead_id WHERE DATE(t.due_date)=CURDATE() ORDER BY t.due_date ASC LIMIT 10")->fetchAll();
@@ -42,6 +44,8 @@ $staffSummary = $pdo->query("SELECT u.full_name,COUNT(l.id) c FROM leads l LEFT 
     <div class="col-md-3"><div class="card"><div class="card-body"><div class="small text-muted">Overdue Follow-up</div><h4><?= e((string)$overdue) ?></h4></div></div></div>
     <div class="col-md-3"><div class="card"><div class="card-body"><div class="small text-muted">Pending Proposals</div><h4><?= e((string)$pendingProposals) ?></h4></div></div></div>
     <div class="col-md-3"><div class="card"><div class="card-body"><div class="small text-muted">Tasks Due Today</div><h4><?= count($tasksToday) ?></h4></div></div></div>
+    <div class="col-md-3"><div class="card"><div class="card-body"><div class="small text-muted">Leads Added This Week</div><h4><?= e((string)$weekCount) ?></h4></div></div></div>
+    <div class="col-md-3"><div class="card"><div class="card-body"><div class="small text-muted">Leads Added This Month</div><h4><?= e((string)$monthCount) ?></h4></div></div></div>
 </div>
 <div class="row g-3">
     <div class="col-md-4"><div class="card"><div class="card-header">Recent Activity</div><div class="card-body timeline"><?php foreach($recentActivities as $a): ?><div class="timeline-item"><strong><?= e($a['full_name'] ?? 'System') ?></strong><br><span class="small text-muted"><?= e($a['action']) ?> - <?= e($a['description'] ?? '') ?></span></div><?php endforeach; ?></div></div></div>

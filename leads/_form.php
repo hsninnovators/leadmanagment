@@ -1,8 +1,10 @@
 <?php
-$stages = ['New Lead','Contacted','Replied','Interested','Meeting / Discussion','Proposal Sent','Follow-up','Closed Won','Not Interested','Closed Lost'];
+$configuredStages = setting($pdo, 'default_stages', '');
+$configuredPriorities = setting($pdo, 'default_priorities', '');
+$stages = $configuredStages ? array_map('trim', explode(',', $configuredStages)) : ['New Lead','Contacted','Replied','Interested','Meeting / Discussion','Proposal Sent','Follow-up','Closed Won','Not Interested','Closed Lost'];
 $sources = ['Google Maps','Facebook','Instagram','LinkedIn','WhatsApp','Email','Website','Referral','Other'];
 $services = ['Social Media Management','Social Media Campaigns','Static Website','Frontend Website','Portfolio Website','Company Profile / Portfolio','Online Frontend Classes','Student Project','Other'];
-$priorities = ['Low','Medium','High'];
+$priorities = $configuredPriorities ? array_map('trim', explode(',', $configuredPriorities)) : ['Low','Medium','High'];
 $leadTypes = ['Business','Student'];
 $method = ['Phone','WhatsApp','Email','LinkedIn','Facebook','Instagram','Other'];
 ?>

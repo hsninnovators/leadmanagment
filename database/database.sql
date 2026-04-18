@@ -253,7 +253,7 @@ INSERT INTO message_templates (channel,category,title,body,created_by,created_at
 ('LinkedIn','Outreach','LinkedIn Intro','Hi {{name}}, noticed your brand online and thought we could help with frontend site + campaign support.',1,NOW());
 
 INSERT INTO settings (`key`,`value`) VALUES
-('company_name','Startup Team'),('system_title','Lead Management Software'),('default_pagination','15'),('upload_size_mb','5'),('timezone','UTC'),('currency_symbol','$'),('report_branding','Professional Lead Report'),('company_logo',''),('company_favicon','');
+('company_name','Startup Team'),('system_title','Lead Management Software'),('default_pagination','15'),('upload_size_mb','5'),('timezone','UTC'),('currency_symbol','$'),('report_branding','Professional Lead Report'),('company_logo',''),('company_favicon',''),('default_stages','New Lead,Contacted,Replied,Interested,Meeting / Discussion,Proposal Sent,Follow-up,Closed Won,Not Interested,Closed Lost'),('default_priorities','Low,Medium,High');
 
 INSERT INTO activity_logs (user_id,action,entity_type,entity_id,description,created_at) VALUES
 (1,'seed_data_loaded','system',NULL,'Initial sample data inserted',NOW()-INTERVAL 1 DAY),

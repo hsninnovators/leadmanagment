@@ -55,6 +55,8 @@ $set=[];foreach($rows as $r){$set[$r['key']]=$r['value'];}
         <div class="col-md-3"><label>Allowed Upload Size MB</label><input name="upload_size_mb" class="form-control" value="<?= e($set['upload_size_mb']??'5') ?>"></div>
         <div class="col-md-3"><label>Currency Symbol</label><input name="currency_symbol" class="form-control" value="<?= e($set['currency_symbol']??'$') ?>"></div>
         <div class="col-md-3"><label>Report Brand Text</label><input name="report_branding" class="form-control" value="<?= e($set['report_branding']??'Professional Lead Report') ?>"></div>
+        <div class="col-md-6"><label>Default Stages (comma separated)</label><input name="default_stages" class="form-control" value="<?= e($set['default_stages']??'New Lead,Contacted,Replied,Interested,Meeting / Discussion,Proposal Sent,Follow-up,Closed Won,Not Interested,Closed Lost') ?>"></div>
+        <div class="col-md-6"><label>Default Priorities (comma separated)</label><input name="default_priorities" class="form-control" value="<?= e($set['default_priorities']??'Low,Medium,High') ?>"></div>
 
         <div class="col-md-6">
             <label>Company Logo Upload</label>

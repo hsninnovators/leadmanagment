@@ -48,6 +48,7 @@ if ($followupOverdue > 0) $extraAlerts[] = ['title' => 'Overdue Follow-ups', 'bo
         <nav class="nav flex-column px-2 py-3">
             <a class="nav-link text-light" href="<?= e(url('dashboard/index.php')) ?>">Dashboard</a>
             <a class="nav-link text-light" href="<?= e(url('leads/index.php')) ?>">Leads</a>
+            <a class="nav-link text-light" href="<?= e(url('leads/pipeline.php')) ?>">Pipeline Board</a>
             <a class="nav-link text-light" href="<?= e(url('tasks/index.php')) ?>">Tasks</a>
             <a class="nav-link text-light" href="<?= e(url('meetings/index.php')) ?>">Meetings</a>
             <a class="nav-link text-light" href="<?= e(url('proposals/index.php')) ?>">Proposals</a>

@@ -58,6 +58,19 @@ CREATE TABLE lead_stage_history (
   FOREIGN KEY (changed_by) REFERENCES users(id)
 );
 
+CREATE TABLE lead_assignment_history (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  lead_id INT NOT NULL,
+  old_user_id INT NULL,
+  new_user_id INT NULL,
+  changed_by INT NOT NULL,
+  changed_at DATETIME NOT NULL,
+  FOREIGN KEY (lead_id) REFERENCES leads(id),
+  FOREIGN KEY (old_user_id) REFERENCES users(id),
+  FOREIGN KEY (new_user_id) REFERENCES users(id),
+  FOREIGN KEY (changed_by) REFERENCES users(id)
+);
+
 CREATE TABLE lead_interactions (
   id INT AUTO_INCREMENT PRIMARY KEY,
   lead_id INT NOT NULL,
@@ -206,6 +219,12 @@ INSERT INTO lead_stage_history (lead_id,stage,changed_by,changed_at) VALUES
 (2,'Contacted',2,NOW()-INTERVAL 1 DAY),
 (3,'Replied',2,NOW()-INTERVAL 1 DAY),
 (4,'New Lead',2,NOW()-INTERVAL 1 DAY);
+
+INSERT INTO lead_assignment_history (lead_id,old_user_id,new_user_id,changed_by,changed_at) VALUES
+(1,NULL,2,1,NOW()-INTERVAL 5 DAY),
+(2,NULL,2,1,NOW()-INTERVAL 4 DAY),
+(3,NULL,2,1,NOW()-INTERVAL 3 DAY),
+(4,NULL,2,1,NOW()-INTERVAL 1 DAY);
 
 INSERT INTO lead_interactions (lead_id,interaction_type,note,next_action,next_follow_up_date,interaction_at,created_by) VALUES
 (1,'Call made','Discussed monthly social package','Send proposal',CURDATE()+INTERVAL 1 DAY,NOW()-INTERVAL 1 DAY,2),

@@ -9,6 +9,7 @@ $users = $pdo->query("SELECT id,full_name FROM users WHERE status='Active' AND d
 $tagsCsv = implode(',', array_column($pdo->query('SELECT t.name FROM lead_tags lt JOIN tags t ON t.id=lt.tag_id WHERE lt.lead_id='.$id)->fetchAll(),'name'));
 if ($_SERVER['REQUEST_METHOD']==='POST') {
     csrf_check();
+    $oldAssigned = (int)$lead['assigned_user_id'];
     $fields = ['lead_type','full_name','company_name','category','city','country','phone','whatsapp','email','website','facebook_link','instagram_link','linkedin_link','google_maps_link','source','service_interest','budget_range','priority','stage','assigned_user_id','preferred_contact_method','pain_point','owner_remarks','approval_flag','closed_reason','next_follow_up_date'];
     $set = implode(',', array_map(fn($f)=>"$f=?",$fields));
     $values=[]; foreach($fields as $f){$values[]=$_POST[$f]??null;} $values[]=$id;
@@ -20,6 +21,9 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
       $pdo->prepare('INSERT IGNORE INTO lead_tags(lead_id,tag_id) VALUES(?,?)')->execute([$id,$tagId]);
     }
     $pdo->prepare('INSERT INTO lead_stage_history (lead_id,stage,changed_by,changed_at) VALUES (?,?,?,NOW())')->execute([$id,$_POST['stage'],current_user()['id']]);
+    if ((int)$_POST['assigned_user_id'] !== $oldAssigned) {
+      $pdo->prepare('INSERT INTO lead_assignment_history (lead_id, old_user_id, new_user_id, changed_by, changed_at) VALUES (?,?,?,?,NOW())')->execute([$id, $oldAssigned ?: null, $_POST['assigned_user_id'], current_user()['id']]);
+    }
     log_activity($pdo,(int)current_user()['id'],'lead_updated','lead',$id,'Lead updated');
     redirect_to('leads/view.php?id='.$id);
 }

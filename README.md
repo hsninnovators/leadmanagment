@@ -37,7 +37,7 @@ It supports daily outreach flows for social media services, frontend websites, a
 1. Authentication + Roles (Admin/Staff)
 2. Dashboard with key business cards and daily pipeline indicators
 3. Lead CRUD with assignment, stages, follow-up, tags, duplicate warning
-4. Lead detail page with notes, interactions, stage history, attachments
+4. Lead detail page with notes, interactions, stage history, assignment history, attachments
 5. Tasks/reminders module
 6. Meetings module
 7. Proposals module
@@ -48,6 +48,7 @@ It supports daily outreach flows for social media services, frontend websites, a
 12. User management + status controls (soft delete/deactivate)
 13. Settings module (logo + favicon upload support)
 14. Activity/audit logs
+15. Pipeline board (kanban-style stage view)
 
 ## Setup (XAMPP / Localhost / Shared Hosting)
 1. Copy project folder to your web root (`htdocs` for XAMPP).

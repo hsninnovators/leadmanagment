@@ -24,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $pdo->prepare('INSERT IGNORE INTO lead_tags(lead_id,tag_id) VALUES(?,?)')->execute([$leadId,$tagId]);
         }
         $pdo->prepare('INSERT INTO lead_stage_history (lead_id,stage,changed_by,changed_at) VALUES (?,?,?,NOW())')->execute([$leadId,$_POST['stage'],current_user()['id']]);
+        $pdo->prepare('INSERT INTO lead_assignment_history (lead_id, old_user_id, new_user_id, changed_by, changed_at) VALUES (?,?,?,?,NOW())')->execute([$leadId, null, $_POST['assigned_user_id'], current_user()['id']]);
         log_activity($pdo,(int)current_user()['id'],'lead_created','lead',$leadId,'Lead created');
         redirect_to('leads/view.php?id='.$leadId);
     }

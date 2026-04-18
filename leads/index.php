@@ -48,6 +48,7 @@ $users = $pdo->query("SELECT id,full_name FROM users WHERE deleted_at IS NULL AN
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h3>Leads</h3>
     <div>
+        <a class="btn btn-outline-dark btn-sm" href="<?= e(url('leads/pipeline.php')) ?>">Pipeline</a>
         <a class="btn btn-outline-secondary btn-sm" href="<?= e(url('leads/import.php')) ?>">CSV Import</a>
         <a class="btn btn-outline-secondary btn-sm" href="<?= e(url('leads/export.php')) ?>?<?= e(http_build_query($_GET)) ?>">CSV Export</a>
         <a class="btn btn-primary btn-sm" href="<?= e(url('leads/create.php')) ?>">Add Lead</a>

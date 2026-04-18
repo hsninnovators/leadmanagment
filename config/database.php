@@ -27,3 +27,16 @@ $pdo->exec("CREATE TABLE IF NOT EXISTS notifications (
     created_at DATETIME NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+
+$pdo->exec("CREATE TABLE IF NOT EXISTS lead_assignment_history (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    lead_id INT NOT NULL,
+    old_user_id INT NULL,
+    new_user_id INT NULL,
+    changed_by INT NOT NULL,
+    changed_at DATETIME NOT NULL,
+    FOREIGN KEY (lead_id) REFERENCES leads(id),
+    FOREIGN KEY (old_user_id) REFERENCES users(id),
+    FOREIGN KEY (new_user_id) REFERENCES users(id),
+    FOREIGN KEY (changed_by) REFERENCES users(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");

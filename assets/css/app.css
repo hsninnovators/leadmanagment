@@ -1,5 +1,19 @@
-body { background: #f7f8fb; }
+body { background: #f3f5f9; font-family: 'Segoe UI', Arial, sans-serif; }
+.app-shell { min-height: 100vh; display: flex; }
+.sidebar { width: 250px; min-height: 100vh; position: sticky; top: 0; }
+.sidebar .nav-link { border-radius: .4rem; margin: .1rem 0; }
+.sidebar .nav-link:hover { background: rgba(255,255,255,.12); }
+.brand-logo { width: 34px; height: 34px; object-fit: contain; background: #fff; border-radius: 6px; padding: 2px; }
+.content-wrap { flex: 1; }
+.topbar { position: sticky; top: 0; z-index: 100; }
+.content-area { max-width: 100%; }
+.card { border: 0; box-shadow: 0 2px 10px rgba(15,23,42,.06); }
 .card-stat { min-height: 120px; }
 .timeline { border-left: 3px solid #dee2e6; padding-left: 1rem; }
 .timeline-item { margin-bottom: 1rem; }
 .table-responsive { background: #fff; border-radius: .5rem; }
+
+@media (max-width: 768px) {
+  .sidebar { position: fixed; left: -260px; z-index: 1200; transition: left .2s ease; }
+  .sidebar.open { left: 0; }
+}

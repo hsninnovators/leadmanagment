@@ -41,12 +41,13 @@ It supports daily outreach flows for social media services, frontend websites, a
 5. Tasks/reminders module
 6. Meetings module
 7. Proposals module
-8. Outreach template module
-9. Daily work summary page
-10. Reports module with filter + CSV export + print pages
-11. User management + status controls (soft delete/deactivate)
-12. Settings module
-13. Activity/audit logs
+8. Notification center (manual + reminder-style alerts)
+9. Outreach template module
+10. Daily work summary page
+11. Reports module with filter + CSV export + print pages
+12. User management + status controls (soft delete/deactivate)
+13. Settings module (logo + favicon upload support)
+14. Activity/audit logs
 
 ## Setup (XAMPP / Localhost / Shared Hosting)
 1. Copy project folder to your web root (`htdocs` for XAMPP).

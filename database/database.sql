@@ -181,6 +181,16 @@ CREATE TABLE activity_logs (
   FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
+CREATE TABLE notifications (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NULL,
+  title VARCHAR(150) NOT NULL,
+  body VARCHAR(255) NOT NULL,
+  is_read TINYINT(1) NOT NULL DEFAULT 0,
+  created_at DATETIME NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
+);
+
 INSERT INTO users (full_name,email,phone,role,password_hash,status,created_at) VALUES
 ('System Admin','admin@example.com','+1-555-0100','Admin','$2y$10$bi7NGwEoVeIr9ytWfKBwQOHg4a7vXl1QbG3VrmYfWXa6xRATYRREm','Active',NOW()),
 ('Sales Staff','staff@example.com','+1-555-0101','Staff','$2y$10$Jf4cS7uJl5Yjj6inUeJ6LeW6W4FbZPKuRjVjvW2VQWfU7p.TSKD8i','Active',NOW());
@@ -224,9 +234,13 @@ INSERT INTO message_templates (channel,category,title,body,created_by,created_at
 ('LinkedIn','Outreach','LinkedIn Intro','Hi {{name}}, noticed your brand online and thought we could help with frontend site + campaign support.',1,NOW());
 
 INSERT INTO settings (`key`,`value`) VALUES
-('company_name','Startup Team'),('system_title','Lead Management Software'),('default_pagination','15'),('upload_size_mb','5'),('timezone','UTC'),('currency_symbol','$');
+('company_name','Startup Team'),('system_title','Lead Management Software'),('default_pagination','15'),('upload_size_mb','5'),('timezone','UTC'),('currency_symbol','$'),('report_branding','Professional Lead Report'),('company_logo',''),('company_favicon','');
 
 INSERT INTO activity_logs (user_id,action,entity_type,entity_id,description,created_at) VALUES
 (1,'seed_data_loaded','system',NULL,'Initial sample data inserted',NOW()-INTERVAL 1 DAY),
 (2,'lead_created','lead',1,'Lead imported from LinkedIn',NOW()-INTERVAL 8 HOUR),
 (2,'proposal_added','proposal',1,'Proposal sent to Blue Pixel Studio',NOW()-INTERVAL 2 HOUR);
+
+INSERT INTO notifications (user_id,title,body,is_read,created_at) VALUES
+(NULL,'Welcome to LeadManager CRM','Your CRM is ready. Review dashboard and start assigning leads.',0,NOW()-INTERVAL 2 HOUR),
+(2,'Follow-up Reminder','You have leads due for follow-up today.',0,NOW()-INTERVAL 1 HOUR);

@@ -6,3 +6,10 @@ document.querySelectorAll('[data-copy-target]').forEach(function(btn){
     setTimeout(()=>btn.textContent='Copy',1000);
   });
 });
+
+const sidebarToggle = document.getElementById('sidebarToggle');
+if (sidebarToggle) {
+  sidebarToggle.addEventListener('click', function(){
+    document.querySelector('.sidebar')?.classList.toggle('open');
+  });
+}
